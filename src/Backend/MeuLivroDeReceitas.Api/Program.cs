@@ -1,6 +1,9 @@
 using MeuLivroDeReceitas.Domain.Extension;
 using MeuLivroDeReceitas.Infrastructure;
 using MeuLivroDeReceitas.Infrastructure.Migrations;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 var builder = WebApplication.CreateBuilder(args);
 
