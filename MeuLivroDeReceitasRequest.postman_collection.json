@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "70be9c95-73f7-43d3-82ff-7948ba6c035d",
+		"name": "MeuLivroDeReceitasRequest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20218872"
+	},
+	"item": [
+		{
+			"name": "Registrar usuario",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"//37 9 8888-8888\r",
+							"\r",
+							"var ddd = _.random(10, 99)\r",
+							"var numeroAdicional = _.random(1, 9)\r",
+							"var primeiros4Digitos = _.random(1000, 9999)\r",
+							"var ultimos4Digitos = _.random(1000, 9999)\r",
+							"\r",
+							"var numeroTelefone = ddd + \" \" + numeroAdicional + \" \" + primeiros4Digitos + \"-\" + ultimos4Digitos\r",
+							"\r",
+							"pm.environment.set(\"numeroTelefone\", numeroTelefone)"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validar se a requisição foi feita com sucesso\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.have.jsonBody(\"token\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"{{$randomFullName}}\",\r\n  \"email\": \"{{$randomEmail}}\",\r\n  \"senha\": \"{{$randomPassword}}\",\r\n  \"telefone\": \"{{numeroTelefone}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/usuario",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URLBASE",
+			"value": "https://localhost:7059",
+			"type": "string"
+		},
+		{
+			"key": "numeroTelefone",
+			"value": ""
+		}
+	]
+}
