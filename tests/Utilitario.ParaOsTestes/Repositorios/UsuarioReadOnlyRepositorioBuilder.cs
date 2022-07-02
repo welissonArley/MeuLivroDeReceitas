@@ -30,6 +30,13 @@ public class UsuarioReadOnlyRepositorioBuilder
         return this;
     }
 
+    public UsuarioReadOnlyRepositorioBuilder RecuperarPorEmailSenha(MeuLivroDeReceitas.Domain.Entidades.Usuario usuario)
+    {
+        _repositorio.Setup(i => i.RecuperarPorEmailSenha(usuario.Email, usuario.Senha)).ReturnsAsync(usuario);
+
+        return this;
+    }
+
     public IUsuarioReadOnlyRepositorio Construir()
     {
         return _repositorio.Object;
