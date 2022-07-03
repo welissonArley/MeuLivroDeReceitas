@@ -47,7 +47,7 @@ public class RegistrarUsuarioTeste : ControllerBase
 
         var responseData = await JsonDocument.ParseAsync(responstaBody);
 
-        var erros = responseData.RootElement.GetProperty("mensagens").Deserialize<List<string>>();
-        erros.Should().ContainSingle().And.Contain(ResourceMensagensDeErro.NOME_USUARIO_EMBRANCO);
+        var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
+        erros.Should().ContainSingle().And.Contain(c => c.GetString().Equals(ResourceMensagensDeErro.NOME_USUARIO_EMBRANCO));
     }
 }
