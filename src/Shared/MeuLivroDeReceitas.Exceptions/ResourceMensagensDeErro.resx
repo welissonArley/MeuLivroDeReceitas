@@ -135,6 +135,9 @@
   <data name="NOME_USUARIO_EMBRANCO" xml:space="preserve">
     <value>O nome do usuário deve ser informado.</value>
   </data>
+  <data name="SENHA_ATUAL_INVALIDA" xml:space="preserve">
+    <value>Senha atual é inválida.</value>
+  </data>
   <data name="SENHA_USUARIO_EMBRANCO" xml:space="preserve">
     <value>A senha do usuário deve ser informada.</value>
   </data>
@@ -146,5 +149,11 @@
   </data>
   <data name="TELEFONE_USUARIO_INVALIDO" xml:space="preserve">
     <value>O telefone do usuário deve estar no formato XX X XXXX-XXXX</value>
+  </data>
+  <data name="TOKEN_EXPIRADO" xml:space="preserve">
+    <value>Faça login novamente no App.</value>
+  </data>
+  <data name="USUARIO_SEM_PERMISSAO" xml:space="preserve">
+    <value>Você não tem permissão para acessar este recurso.</value>
   </data>
 </root>
