@@ -13,7 +13,7 @@ namespace MeuLivroDeReceitas.Infrastructure;
 
 public static class Bootstrapper
 {
-    public static void AddRespositorio(this IServiceCollection services, IConfiguration configurationManager)
+    public static void AddInfrastructure(this IServiceCollection services, IConfiguration configurationManager)
     {
         AddFluentMigrator(services, configurationManager);
 
@@ -24,7 +24,7 @@ public static class Bootstrapper
 
     private static void AddContexto(IServiceCollection services, IConfiguration configurationManager)
     {
-        bool.TryParse(configurationManager.GetSection("Configuracoes:BancoDeDadosInMemory").Value, out bool bancoDeDadosInMemory);
+        _ = bool.TryParse(configurationManager.GetSection("Configuracoes:BancoDeDadosInMemory").Value, out bool bancoDeDadosInMemory);
 
         if (!bancoDeDadosInMemory)
         {
@@ -52,7 +52,7 @@ public static class Bootstrapper
 
     private static void AddFluentMigrator(IServiceCollection services, IConfiguration configurationManager)
     {
-        bool.TryParse(configurationManager.GetSection("Configuracoes:BancoDeDadosInMemory").Value, out bool bancoDeDadosInMemory);
+        _ = bool.TryParse(configurationManager.GetSection("Configuracoes:BancoDeDadosInMemory").Value, out bool bancoDeDadosInMemory);
 
         if (!bancoDeDadosInMemory)
         {
