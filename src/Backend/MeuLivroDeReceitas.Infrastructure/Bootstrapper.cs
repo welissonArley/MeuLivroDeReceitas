@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 using Microsoft.EntityFrameworkCore;
+using MeuLivroDeReceitas.Domain.Repositorios.Usuario;
 
 namespace MeuLivroDeReceitas.Infrastructure;
 
@@ -45,7 +46,8 @@ public static class Bootstrapper
     private static void AddRepositorios(IServiceCollection services)
     {
         services.AddScoped<IUsuarioWriteOnlyRepositorio, UsuarioRepositorio>()
-            .AddScoped<IUsuarioReadOnlyRepositorio, UsuarioRepositorio>();
+            .AddScoped<IUsuarioReadOnlyRepositorio, UsuarioRepositorio>()
+            .AddScoped<IUpdateOnlyRepositorio, UsuarioRepositorio>();
     }
 
     private static void AddFluentMigrator(IServiceCollection services, IConfiguration configurationManager)
