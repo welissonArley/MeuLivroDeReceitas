@@ -8,6 +8,9 @@ namespace WebApi.Test;
 
 public class MeuLivroReceitaWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
 {
+    private MeuLivroDeReceitas.Domain.Entidades.Usuario _usuario;
+    private string _senha;
+    
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Test")
@@ -34,6 +37,18 @@ public class MeuLivroReceitaWebApplicationFactory<TStartup> : WebApplicationFact
                 var database = scopeService.GetRequiredService<MeuLivroDeReceitasContext>();
 
                 database.Database.EnsureDeleted();
+
+                (_usuario, _senha) = ContextSeedInMemory.Seed(database);
             });
+    }
+
+    public MeuLivroDeReceitas.Domain.Entidades.Usuario RecuperarUsuario()
+    {
+        return _usuario;
+    }
+
+    public string RecuperarSenha()
+    {
+        return _senha;
     }
 }
