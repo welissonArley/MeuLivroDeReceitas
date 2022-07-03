@@ -1,4 +1,4 @@
-﻿namespace MeuLivroDeReceitas.Domain.Repositorios;
+﻿namespace MeuLivroDeReceitas.Domain.Repositorios.Usuario;
 
 public interface IUsuarioReadOnlyRepositorio
 {
