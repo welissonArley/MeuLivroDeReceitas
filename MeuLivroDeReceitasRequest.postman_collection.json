@@ -1,0 +1,303 @@
+{
+	"info": {
+		"_postman_id": "70982c73-8b90-4ab9-a594-09c736f36d56",
+		"name": "MeuLivroDeReceitasRequest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20218872"
+	},
+	"item": [
+		{
+			"name": "Registrar usuario",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var ddd = _.random(10, 99)\r",
+							"var numeroAdicional = _.random(1, 9)\r",
+							"var primeiros4Digitos = _.random(1000, 9999)\r",
+							"var ultimos4Digitos = _.random(1000, 9999)\r",
+							"\r",
+							"var numeroTelefone = ddd + \" \" + numeroAdicional + \" \" + primeiros4Digitos + \"-\" + ultimos4Digitos\r",
+							"\r",
+							"pm.environment.set(\"numeroTelefone\", numeroTelefone)\r",
+							"\r",
+							"let senha = pm.variables.replaceIn('{{$randomPassword}}')\r",
+							"let email = pm.variables.replaceIn('{{$randomEmail}}')\r",
+							"\r",
+							"postman.setGlobalVariable(\"SENHA\", senha);\r",
+							"postman.setGlobalVariable(\"EMAIL\", email);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validar se a requisição foi feita com sucesso\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.have.jsonBody(\"token\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nome\": \"{{$randomFullName}}\",\r\n  \"email\": \"{{EMAIL}}\",\r\n  \"senha\": \"{{SENHA}}\",\r\n  \"telefone\": \"{{numeroTelefone}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/usuario",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Fazer login na API\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.jsonBody(\"nome\");\r",
+							"    pm.response.to.have.jsonBody(\"token\");\r",
+							"\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"TOKEN\", jsonData.token);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{EMAIL}}\",\r\n  \"senha\": \"{{SENHA}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/login",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Fazer login usuario com erro",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Fazer login na API\", function(){\r",
+							"    pm.response.to.have.status(401);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.jsonBody(\"mensagens\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"email@invalido.com\",\r\n  \"senha\": \"senhaInvalida\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/login",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Alterar Senha Usuario",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let novaSenha = pm.variables.replaceIn('{{$randomPassword}}')\r",
+							"\r",
+							"postman.setGlobalVariable(\"NOVASENHA\", novaSenha);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Fazer login na API\", function(){\r",
+							"    pm.response.to.have.status(204);\r",
+							"\r",
+							"    var novaSenha = postman.getGlobalVariable(\"NOVASENHA\");\r",
+							"\r",
+							"    pm.environment.set(\"SENHA\", novaSenha);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"senhaAtual\": \"{{SENHA}}\",\r\n  \"novaSenha\": \"{{NOVASENHA}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/usuario/alterar-senha",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"usuario",
+						"alterar-senha"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login usuario Apos troca de senha",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Fazer login na API\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.jsonBody(\"nome\");\r",
+							"    pm.response.to.have.jsonBody(\"token\");\r",
+							"\r",
+							"    let jsonData = pm.response.json();\r",
+							"    pm.environment.set(\"TOKEN\", jsonData.token);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{EMAIL}}\",\r\n  \"senha\": \"{{SENHA}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/login",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "URLBASE",
+			"value": "https://localhost:7059",
+			"type": "string"
+		},
+		{
+			"key": "numeroTelefone",
+			"value": ""
+		}
+	]
+}
