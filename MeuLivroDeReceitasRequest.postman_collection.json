@@ -38,6 +38,7 @@
 							"pm.test(\"Validar se a requisição foi feita com sucesso\", function(){\r",
 							"    pm.response.to.have.status(201);\r",
 							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
 							"    pm.response.to.have.jsonBody(\"token\");\r",
 							"})"
 						],
@@ -47,7 +48,13 @@
 			],
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Accept-Language",
+						"value": "en",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n  \"nome\": \"{{$randomFullName}}\",\r\n  \"email\": \"{{EMAIL}}\",\r\n  \"senha\": \"{{SENHA}}\",\r\n  \"telefone\": \"{{numeroTelefone}}\"\r\n}",
@@ -263,6 +270,62 @@
 					],
 					"path": [
 						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar receita",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Validar se registrou receita com sucesso\", function(){\r",
+							"    pm.response.to.have.status(201);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.jsonBody(\"id\");\r",
+							"    pm.response.to.have.jsonBody(\"titulo\");\r",
+							"    pm.response.to.have.jsonBody(\"categoria\");\r",
+							"    pm.response.to.have.jsonBody(\"modoPreparo\");\r",
+							"    pm.response.to.have.jsonBody(\"ingredientes\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"titulo\": \"{{$randomNoun}}\",\r\n  \"categoria\": 2,\r\n  \"modoPreparo\": \"{{$randomLoremParagraph}}\",\r\n  \"ingredientes\": [\r\n    {\r\n      \"produto\": \"{{$randomProduct}}\",\r\n      \"quantidade\": \"{{$randomVerb}}\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{URLBASE}}/receitas",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"receitas"
 					]
 				}
 			},
