@@ -57,8 +57,8 @@ public class LoginTest : ControllerBase
 
         var responseData = await JsonDocument.ParseAsync(responstaBody);
 
-        var erros = responseData.RootElement.GetProperty("mensagens").Deserialize<List<string>>();
-        erros.Should().ContainSingle().And.Contain(ResourceMensagensDeErro.LOGIN_INVALIDO);
+        var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
+        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(ResourceMensagensDeErro.LOGIN_INVALIDO));
     }
 
     [Fact]
@@ -78,8 +78,8 @@ public class LoginTest : ControllerBase
 
         var responseData = await JsonDocument.ParseAsync(responstaBody);
 
-        var erros = responseData.RootElement.GetProperty("mensagens").Deserialize<List<string>>();
-        erros.Should().ContainSingle().And.Contain(ResourceMensagensDeErro.LOGIN_INVALIDO);
+        var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
+        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(ResourceMensagensDeErro.LOGIN_INVALIDO));
     }
 
     [Fact]
@@ -99,7 +99,7 @@ public class LoginTest : ControllerBase
 
         var responseData = await JsonDocument.ParseAsync(responstaBody);
 
-        var erros = responseData.RootElement.GetProperty("mensagens").Deserialize<List<string>>();
-        erros.Should().ContainSingle().And.Contain(ResourceMensagensDeErro.LOGIN_INVALIDO);
+        var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
+        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(ResourceMensagensDeErro.LOGIN_INVALIDO));
     }
 }
