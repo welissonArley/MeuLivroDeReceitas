@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CATEGORIA_RECEITA_INVALIDA" xml:space="preserve">
+    <value>A categoria da receita é inválida.</value>
+  </data>
   <data name="EMAIL_JA_REGISTRADO" xml:space="preserve">
     <value>O e-mail informado já esta registrado na base de dados.</value>
   </data>
@@ -132,8 +135,23 @@
   <data name="LOGIN_INVALIDO" xml:space="preserve">
     <value>O e-mail e/ou senha estão incorretos.</value>
   </data>
+  <data name="MODOPREPARO_RECEITA_EMBRANCO" xml:space="preserve">
+    <value>O modo de preparo da receita deve ser informado.</value>
+  </data>
   <data name="NOME_USUARIO_EMBRANCO" xml:space="preserve">
     <value>O nome do usuário deve ser informado.</value>
+  </data>
+  <data name="RECEITA_INGREDIENTES_REPETIDOS" xml:space="preserve">
+    <value>Exitem ingredientes repetidos na sua lista.</value>
+  </data>
+  <data name="RECEITA_INGREDIENTE_PRODUTO_EMBRANCO" xml:space="preserve">
+    <value>O produto do ingrediente deve ser informado.</value>
+  </data>
+  <data name="RECEITA_INGREDIENTE_QUANTIDADE_EMBRANCO" xml:space="preserve">
+    <value>A quantidade do ingrediente deve ser informada.</value>
+  </data>
+  <data name="RECEITA_MINIMO_UM_INGREDIENTE" xml:space="preserve">
+    <value>A receita deve ter no mínimo um ingrediente.</value>
   </data>
   <data name="SENHA_ATUAL_INVALIDA" xml:space="preserve">
     <value>Senha atual é inválida.</value>
@@ -149,6 +167,9 @@
   </data>
   <data name="TELEFONE_USUARIO_INVALIDO" xml:space="preserve">
     <value>O telefone do usuário deve estar no formato XX X XXXX-XXXX</value>
+  </data>
+  <data name="TITULO_RECEITA_EMBRANCO" xml:space="preserve">
+    <value>O título da receita deve ser informado.</value>
   </data>
   <data name="TOKEN_EXPIRADO" xml:space="preserve">
     <value>Faça login novamente no App.</value>

@@ -61,6 +61,15 @@ namespace MeuLivroDeReceitas.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A categoria da receita é inválida..
+        /// </summary>
+        public static string CATEGORIA_RECEITA_INVALIDA {
+            get {
+                return ResourceManager.GetString("CATEGORIA_RECEITA_INVALIDA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O e-mail informado já esta registrado na base de dados..
         /// </summary>
         public static string EMAIL_JA_REGISTRADO {
@@ -106,11 +115,56 @@ namespace MeuLivroDeReceitas.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O modo de preparo da receita deve ser informado..
+        /// </summary>
+        public static string MODOPREPARO_RECEITA_EMBRANCO {
+            get {
+                return ResourceManager.GetString("MODOPREPARO_RECEITA_EMBRANCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O nome do usuário deve ser informado..
         /// </summary>
         public static string NOME_USUARIO_EMBRANCO {
             get {
                 return ResourceManager.GetString("NOME_USUARIO_EMBRANCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O produto do ingrediente deve ser informado..
+        /// </summary>
+        public static string RECEITA_INGREDIENTE_PRODUTO_EMBRANCO {
+            get {
+                return ResourceManager.GetString("RECEITA_INGREDIENTE_PRODUTO_EMBRANCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A quantidade do ingrediente deve ser informada..
+        /// </summary>
+        public static string RECEITA_INGREDIENTE_QUANTIDADE_EMBRANCO {
+            get {
+                return ResourceManager.GetString("RECEITA_INGREDIENTE_QUANTIDADE_EMBRANCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exitem ingredientes repetidos na sua lista..
+        /// </summary>
+        public static string RECEITA_INGREDIENTES_REPETIDOS {
+            get {
+                return ResourceManager.GetString("RECEITA_INGREDIENTES_REPETIDOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A receita deve ter no mínimo um ingrediente..
+        /// </summary>
+        public static string RECEITA_MINIMO_UM_INGREDIENTE {
+            get {
+                return ResourceManager.GetString("RECEITA_MINIMO_UM_INGREDIENTE", resourceCulture);
             }
         }
         
@@ -156,6 +210,15 @@ namespace MeuLivroDeReceitas.Exceptions {
         public static string TELEFONE_USUARIO_INVALIDO {
             get {
                 return ResourceManager.GetString("TELEFONE_USUARIO_INVALIDO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O título da receita deve ser informado..
+        /// </summary>
+        public static string TITULO_RECEITA_EMBRANCO {
+            get {
+                return ResourceManager.GetString("TITULO_RECEITA_EMBRANCO", resourceCulture);
             }
         }
         
