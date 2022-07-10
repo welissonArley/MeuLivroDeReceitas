@@ -1,5 +1,6 @@
 using HashidsNet;
 using MeuLivroDeReceitas.Api.Filtros;
+using MeuLivroDeReceitas.Api.Filtros.Swagger;
 using MeuLivroDeReceitas.Api.Middleware;
 using MeuLivroDeReceitas.Application;
 using MeuLivroDeReceitas.Application.Servicos.Automapper;
@@ -22,7 +23,10 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(option =>
+{
+    option.OperationFilter<HashidsOperationFilter>();
+});
 
 builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddApplication(builder.Configuration);
