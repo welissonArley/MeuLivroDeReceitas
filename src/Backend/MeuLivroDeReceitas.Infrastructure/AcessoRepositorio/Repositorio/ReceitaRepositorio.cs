@@ -13,6 +13,13 @@ public class ReceitaRepositorio : IReceitaWriteOnlyRepositorio, IReceitaReadOnly
         _contexto = contexto;
     }
 
+    public async Task<Receita> RecuperarPorId(long receitaId)
+    {
+        return await _contexto.Receitas.AsNoTracking()
+            .Include(r => r.Ingredientes)
+            .FirstOrDefaultAsync(r => r.Id == receitaId);
+    }
+
     public async Task<IList<Receita>> RecuperarTodasDoUsuario(long usuarioId)
     {
         return await _contexto.Receitas.AsNoTracking()
