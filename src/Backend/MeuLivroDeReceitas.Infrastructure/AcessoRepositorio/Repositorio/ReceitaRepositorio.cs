@@ -43,4 +43,11 @@ public class ReceitaRepositorio : IReceitaWriteOnlyRepositorio, IReceitaReadOnly
     {
         _contexto.Receitas.Update(receita);
     }
+
+    public async Task Deletar(long receitaId)
+    {
+        var receita = await _contexto.Receitas.FirstOrDefaultAsync(r => r.Id == receitaId);
+        
+        _contexto.Receitas.Remove(receita);
+    }
 }
