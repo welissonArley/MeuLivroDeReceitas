@@ -1,6 +1,7 @@
 ﻿using MeuLivroDeReceitas.Api.Binder;
 using MeuLivroDeReceitas.Api.Filtros;
 using MeuLivroDeReceitas.Application.UseCases.Receita.Atualizar;
+using MeuLivroDeReceitas.Application.UseCases.Receita.Deletar;
 using MeuLivroDeReceitas.Application.UseCases.Receita.RecuperarPorId;
 using MeuLivroDeReceitas.Application.UseCases.Receita.Registrar;
 using MeuLivroDeReceitas.Comunicacao.Requisicoes;
@@ -36,7 +37,7 @@ public class ReceitasController : MeuLivroDeReceitasController
 
         return Ok(resposta);
     }
-    /*
+    
     [HttpPut]
     [Route("{id:hashids}")]
     [ProducesResponseType(typeof(RespostaReceitaJson), StatusCodes.Status204NoContent)]
@@ -48,5 +49,17 @@ public class ReceitasController : MeuLivroDeReceitasController
         await useCase.Executar(id, requisicao);
 
         return NoContent();
-    }*/
+    }
+
+    [HttpDelete]
+    [Route("{id:hashids}")]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
+    public async Task<IActionResult> Deletar(
+        [FromServices] IDeletarReceitaUseCase useCase,
+        [FromRoute][ModelBinder(typeof(HashidsModelBinder))] long id)
+    {
+        await useCase.Executar(id);
+
+        return NoContent();
+    }
 }
