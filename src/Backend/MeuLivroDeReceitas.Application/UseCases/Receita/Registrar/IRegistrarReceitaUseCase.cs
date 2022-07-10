@@ -4,5 +4,5 @@ using MeuLivroDeReceitas.Comunicacao.Respostas;
 namespace MeuLivroDeReceitas.Application.UseCases.Receita.Registrar;
 public interface IRegistrarReceitaUseCase
 {
-    Task<RespostaReceitaJson> Executar(RequisicaoRegistrarReceitaJson requisicao);
+    Task<RespostaReceitaJson> Executar(RequisicaoReceitaJson requisicao);
 }
