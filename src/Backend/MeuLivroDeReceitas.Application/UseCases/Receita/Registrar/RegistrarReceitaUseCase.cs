@@ -22,7 +22,7 @@ public class RegistrarReceitaUseCase : IRegistrarReceitaUseCase
         _repositorio = repositorio;
     }
 
-    public async Task<RespostaReceitaJson> Executar(RequisicaoRegistrarReceitaJson requisicao)
+    public async Task<RespostaReceitaJson> Executar(RequisicaoReceitaJson requisicao)
     {
         Validar(requisicao);
 
@@ -38,7 +38,7 @@ public class RegistrarReceitaUseCase : IRegistrarReceitaUseCase
         return _mapper.Map<RespostaReceitaJson>(receita);
     }
 
-    private static void Validar(RequisicaoRegistrarReceitaJson requisicao)
+    private static void Validar(RequisicaoReceitaJson requisicao)
     {
         var validator = new RegistrarReceitaValidator();
         var resultado = validator.Validate(requisicao);
