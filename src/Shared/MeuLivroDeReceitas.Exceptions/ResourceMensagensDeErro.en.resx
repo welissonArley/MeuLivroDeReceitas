@@ -153,6 +153,9 @@
   <data name="RECEITA_MINIMO_UM_INGREDIENTE" xml:space="preserve">
     <value>The recipe must have at least one ingredient.</value>
   </data>
+  <data name="RECEITA_NAO_ENCONTRADA" xml:space="preserve">
+    <value>Recipe not found.</value>
+  </data>
   <data name="SENHA_ATUAL_INVALIDA" xml:space="preserve">
     <value>Current password invalid.</value>
   </data>
