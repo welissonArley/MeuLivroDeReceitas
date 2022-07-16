@@ -39,7 +39,7 @@ public class DeletarReceitaUseCase : IDeletarReceitaUseCase
 
     public static void Validar(Domain.Entidades.Usuario usuarioLogado, Domain.Entidades.Receita receita)
     {
-        if (receita == null || receita.UsuarioId != usuarioLogado.Id)
+        if (receita is null || receita.UsuarioId != usuarioLogado.Id)
         {
             throw new ErrosDeValidacaoException(new List<string> { ResourceMensagensDeErro.RECEITA_NAO_ENCONTRADA });
         }

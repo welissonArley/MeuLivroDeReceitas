@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using MeuLivroDeReceitas.Comunicacao.Requisicoes;
+using MeuLivroDeReceitas.Domain.Extension;
 using MeuLivroDeReceitas.Exceptions;
 
 namespace MeuLivroDeReceitas.Application.UseCases.Receita;
@@ -18,8 +19,8 @@ public class ReceitaValidator : AbstractValidator<RequisicaoReceitaJson>
         });
 
         RuleFor(x => x.Ingredientes).Custom((ingredientes, contexto) =>
-        {
-            var produtosDistintos = ingredientes.Select(c => c.Produto).Distinct();
+        {           
+            var produtosDistintos = ingredientes.Select(c => c.Produto.RemoverAcentos().ToLower()).Distinct();
             if (produtosDistintos.Count() != ingredientes.Count)
             {
                 contexto.AddFailure(new FluentValidation.Results.ValidationFailure("Ingredientes", ResourceMensagensDeErro.RECEITA_INGREDIENTES_REPETIDOS));
