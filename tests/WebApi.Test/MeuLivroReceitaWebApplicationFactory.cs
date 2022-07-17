@@ -8,9 +8,12 @@ namespace WebApi.Test;
 
 public class MeuLivroReceitaWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
 {
-    private MeuLivroDeReceitas.Domain.Entidades.Usuario _usuario;
-    private string _senha;
-    
+    private MeuLivroDeReceitas.Domain.Entidades.Usuario _usuarioComReceita;
+    private string _senhaUsarioComReceita;
+
+    private MeuLivroDeReceitas.Domain.Entidades.Usuario _usuarioSemReceita;
+    private string _senhaUsarioSemReceita;
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Test")
@@ -38,17 +41,28 @@ public class MeuLivroReceitaWebApplicationFactory<TStartup> : WebApplicationFact
 
                 database.Database.EnsureDeleted();
 
-                (_usuario, _senha) = ContextSeedInMemory.Seed(database);
+                (_usuarioComReceita, _senhaUsarioComReceita) = ContextSeedInMemory.Seed(database);
+                (_usuarioSemReceita, _senhaUsarioSemReceita) = ContextSeedInMemory.SeedUsuarioSemReceita(database);
             });
     }
 
     public MeuLivroDeReceitas.Domain.Entidades.Usuario RecuperarUsuario()
     {
-        return _usuario;
+        return _usuarioComReceita;
     }
 
     public string RecuperarSenha()
     {
-        return _senha;
+        return _senhaUsarioComReceita;
+    }
+
+    public MeuLivroDeReceitas.Domain.Entidades.Usuario RecuperarUsuarioSemReceita()
+    {
+        return _usuarioSemReceita;
+    }
+
+    public string RecuperarSenhaSemReceita()
+    {
+        return _senhaUsarioSemReceita;
     }
 }

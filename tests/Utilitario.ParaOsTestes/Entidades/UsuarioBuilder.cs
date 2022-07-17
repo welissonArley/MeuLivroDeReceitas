@@ -8,10 +8,25 @@ public class UsuarioBuilder
 {
     public static (Usuario usuario, string senha) Construir()
     {
+        (var usuario, var senha) = CriarUsuario();
+        usuario.Id = 1;
+
+        return (usuario, senha);
+    }
+
+    public static (Usuario usuario, string senha) ConstruirUsuario2()
+    {
+        (var usuario, var senha) = CriarUsuario();
+        usuario.Id = 2;
+
+        return (usuario, senha);        
+    }
+
+    private static (Usuario usuario, string senha) CriarUsuario()
+    {
         string senha = string.Empty;
-        
+
         var usuarioGerado = new Faker<Usuario>()
-            .RuleFor(u => u.Id, _ => 1)
             .RuleFor(c => c.Nome, f => f.Person.FullName)
             .RuleFor(c => c.Email, f => f.Internet.Email())
             .RuleFor(c => c.Senha, f =>

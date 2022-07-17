@@ -1,4 +1,5 @@
-﻿using MeuLivroDeReceitas.Exceptions;
+﻿using MeuLivroDeReceitas.Comunicacao.Requisicoes;
+using MeuLivroDeReceitas.Exceptions;
 using Newtonsoft.Json;
 using System.Globalization;
 using System.Text;
@@ -17,8 +18,10 @@ public class ControllerBase : IClassFixture<MeuLivroReceitaWebApplicationFactory
         ResourceMensagensDeErro.Culture = CultureInfo.CurrentCulture;
     }
 
-    protected async Task<HttpResponseMessage> PostRequest(string metodo, object body)
+    protected async Task<HttpResponseMessage> PostRequest(string metodo, object body, string token = "")
     {
+        AutorizarRequisicao(token);
+        
         var jsonString = JsonConvert.SerializeObject(body);
 
         return await _client.PostAsync(metodo, new StringContent(jsonString, Encoding.UTF8, "application/json"));
@@ -31,6 +34,20 @@ public class ControllerBase : IClassFixture<MeuLivroReceitaWebApplicationFactory
         var jsonString = JsonConvert.SerializeObject(body);
 
         return await _client.PutAsync(metodo, new StringContent(jsonString, Encoding.UTF8, "application/json"));
+    }
+
+    protected async Task<HttpResponseMessage> GetRequest(string metodo, string token = "")
+    {
+        AutorizarRequisicao(token);
+
+        return await _client.GetAsync(metodo);
+    }
+
+    protected async Task<HttpResponseMessage> DeleteRequest(string metodo, string token = "")
+    {
+        AutorizarRequisicao(token);
+
+        return await _client.DeleteAsync(metodo);
     }
 
     protected async Task<string> Login(string email, string senha)
@@ -49,10 +66,23 @@ public class ControllerBase : IClassFixture<MeuLivroReceitaWebApplicationFactory
 
         return responseData.RootElement.GetProperty("token").GetString();
     }
+
+    protected async Task<string> GetReceitaId(string token)
+    {
+        var requisicao = new RequisicaoDashboardJson();
+
+        var resposta = await PutRequest("dashboard", requisicao, token);
+
+        await using var responstaBody = await resposta.Content.ReadAsStreamAsync();
+
+        var responseData = await JsonDocument.ParseAsync(responstaBody);
+
+        return responseData.RootElement.GetProperty("receitas").EnumerateArray().First().GetProperty("id").GetString();
+    }
     
     private void AutorizarRequisicao(string token)
     {
-        if (!string.IsNullOrWhiteSpace(token))
+        if (!string.IsNullOrWhiteSpace(token) && !_client.DefaultRequestHeaders.Contains("Authorization"))
         {
             _client.DefaultRequestHeaders.Add("Authorization", $"Bearer {token}");
         }
