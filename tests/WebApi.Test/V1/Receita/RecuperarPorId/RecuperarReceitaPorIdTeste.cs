@@ -39,6 +39,7 @@ public class RecuperarReceitaPorIdTeste : ControllerBase
         responseData.RootElement.GetProperty("categoria").GetUInt16().Should().BeInRange(0, 3);
         responseData.RootElement.GetProperty("modoPreparo").GetString().Should().NotBeNullOrWhiteSpace();
         responseData.RootElement.GetProperty("ingredientes").GetArrayLength().Should().BeGreaterThan(0);
+        responseData.RootElement.GetProperty("tempoPreparo").GetUInt32().Should().BeGreaterThan(0).And.BeLessThanOrEqualTo(1000);
     }
 
     [Fact]

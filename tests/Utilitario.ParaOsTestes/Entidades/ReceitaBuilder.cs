@@ -13,6 +13,7 @@ public class ReceitaBuilder
             .RuleFor(c => c.Categoria, f => f.PickRandom<Categoria>())
             .RuleFor(c => c.ModoPreparo, f => f.Lorem.Paragraph())
             .RuleFor(c => c.Ingredientes, f => RandomIngredientes(f, usuario.Id))
+            .RuleFor(c => c.TempoPreparo, f => f.Random.Int(1, 1000))
             .RuleFor(c => c.UsuarioId, _ => usuario.Id);
     }
 

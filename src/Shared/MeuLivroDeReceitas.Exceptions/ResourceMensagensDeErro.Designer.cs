@@ -223,6 +223,15 @@ namespace MeuLivroDeReceitas.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O tempo de preparo é invalido..
+        /// </summary>
+        public static string TEMPO_PREPARO_INVALIDO {
+            get {
+                return ResourceManager.GetString("TEMPO_PREPARO_INVALIDO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O título da receita deve ser informado..
         /// </summary>
         public static string TITULO_RECEITA_EMBRANCO {
