@@ -123,6 +123,51 @@
 			"response": []
 		},
 		{
+			"name": "Recuperar perfil usuario",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Recuperar perfil do usuario\", function(){\r",
+							"    pm.response.to.have.status(200);\r",
+							"    pm.response.to.be.withBody;\r",
+							"    pm.response.to.be.json;\r",
+							"    pm.response.to.have.jsonBody(\"nome\");\r",
+							"    pm.response.to.have.jsonBody(\"email\");\r",
+							"    pm.response.to.have.jsonBody(\"telefone\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{TOKEN}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{URLBASE}}/usuario",
+					"host": [
+						"{{URLBASE}}"
+					],
+					"path": [
+						"usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Fazer login usuario com erro",
 			"event": [
 				{
