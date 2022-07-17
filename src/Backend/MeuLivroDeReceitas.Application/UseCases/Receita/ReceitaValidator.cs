@@ -12,6 +12,7 @@ public class ReceitaValidator : AbstractValidator<RequisicaoReceitaJson>
         RuleFor(x => x.Categoria).IsInEnum().WithMessage(ResourceMensagensDeErro.CATEGORIA_RECEITA_INVALIDA);
         RuleFor(x => x.ModoPreparo).NotEmpty().WithMessage(ResourceMensagensDeErro.MODOPREPARO_RECEITA_EMBRANCO);
         RuleFor(x => x.Ingredientes).NotEmpty().WithMessage(ResourceMensagensDeErro.RECEITA_MINIMO_UM_INGREDIENTE);
+        RuleFor(x => x.TempoPreparo).InclusiveBetween(1, 1000).WithMessage(ResourceMensagensDeErro.TEMPO_PREPARO_INVALIDO);
         RuleForEach(x => x.Ingredientes).ChildRules(ingrediente =>
         {
             ingrediente.RuleFor(x => x.Produto).NotEmpty().WithMessage(ResourceMensagensDeErro.RECEITA_INGREDIENTE_PRODUTO_EMBRANCO);

@@ -20,6 +20,25 @@ public class AtualizarReceitaValidatorTest
         resultado.IsValid.Should().BeTrue();
     }
 
+    [Theory]
+    [InlineData(0)]
+    [InlineData(-1)]
+    [InlineData(1001)]
+    [InlineData(1002)]
+    [InlineData(100000)]
+    public void Validar_Erro_Tempo_Preparo_Invalido(int tempo)
+    {
+        var validator = new AtualizarReceitaValidator();
+
+        var requisicao = RequisicaoReceitaBuilder.Construir();
+        requisicao.TempoPreparo = tempo;
+
+        var resultado = validator.Validate(requisicao);
+
+        resultado.IsValid.Should().BeFalse();
+        resultado.Errors.Should().ContainSingle().And.Contain(error => error.ErrorMessage.Equals(ResourceMensagensDeErro.TEMPO_PREPARO_INVALIDO));
+    }
+
     [Fact]
     public void Validar_Erro_Titulo_Vazio()
     {

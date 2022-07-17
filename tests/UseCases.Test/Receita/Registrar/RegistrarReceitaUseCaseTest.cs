@@ -29,6 +29,7 @@ public class RegistrarReceitaUseCaseTest
         resposta.Titulo.Should().Be(requisicao.Titulo);
         resposta.Categoria.Should().Be(requisicao.Categoria);
         resposta.ModoPreparo.Should().Be(requisicao.ModoPreparo);
+        resposta.TempoPreparo.Should().Be(requisicao.TempoPreparo);
     }
 
     [Fact]

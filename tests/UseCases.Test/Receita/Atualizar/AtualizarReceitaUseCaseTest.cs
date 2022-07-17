@@ -32,6 +32,7 @@ public class AtualizarReceitaUseCaseTest
         receita.Titulo.Should().Be(requisicao.Titulo);
         receita.Categoria.Should().Be((MeuLivroDeReceitas.Domain.Enum.Categoria)requisicao.Categoria);
         receita.ModoPreparo.Should().Be(requisicao.ModoPreparo);
+        receita.TempoPreparo.Should().Be(requisicao.TempoPreparo);
         receita.Ingredientes.Should().HaveCount(requisicao.Ingredientes.Count);
     }
 

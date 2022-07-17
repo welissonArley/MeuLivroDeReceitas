@@ -38,10 +38,11 @@ public class RegistrarReceitaTest : ControllerBase
         responseData.RootElement.GetProperty("titulo").GetString().Should().Be(requisicao.Titulo);
         responseData.RootElement.GetProperty("categoria").GetUInt16().Should().Be((ushort)requisicao.Categoria);
         responseData.RootElement.GetProperty("modoPreparo").GetString().Should().Be(requisicao.ModoPreparo);
+        responseData.RootElement.GetProperty("tempoPreparo").GetInt32().Should().Be(requisicao.TempoPreparo);
     }
 
     [Fact]
-    public async Task Validar_Erro_SenhaEmBranco()
+    public async Task Validar_Erro_Sem_Ingredientes()
     {
         var token = await Login(_usuario.Email, _senha);
         var requisicao = RequisicaoReceitaBuilder.Construir();

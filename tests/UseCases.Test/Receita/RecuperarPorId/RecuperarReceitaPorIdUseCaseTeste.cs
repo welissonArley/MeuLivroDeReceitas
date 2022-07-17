@@ -25,6 +25,7 @@ public class RecuperarReceitaPorIdUseCaseTeste
         resposta.Titulo.Should().Be(receita.Titulo);
         resposta.Categoria.Should().Be((MeuLivroDeReceitas.Comunicacao.Enum.Categoria)receita.Categoria);
         resposta.ModoPreparo.Should().Be(receita.ModoPreparo);
+        resposta.TempoPreparo.Should().Be(receita.TempoPreparo);
         resposta.Ingredientes.Should().HaveCount(receita.Ingredientes.Count);
     }
 
