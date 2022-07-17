@@ -21,7 +21,7 @@ public class FiltroDasExceptions : IExceptionFilter
         }
     }
     
-    private void TratarMeuLivroDeReceitasException(ExceptionContext context)
+    private static void TratarMeuLivroDeReceitasException(ExceptionContext context)
     {
         if (context.Exception is ErrosDeValidacaoException)
         {
