@@ -1,6 +1,7 @@
 using HashidsNet;
 using MeuLivroDeReceitas.Api.Filtros;
 using MeuLivroDeReceitas.Api.Filtros.Swagger;
+using MeuLivroDeReceitas.Api.Filtros.UsuarioLogado;
 using MeuLivroDeReceitas.Api.Middleware;
 using MeuLivroDeReceitas.Application;
 using MeuLivroDeReceitas.Application.Servicos.Automapper;
