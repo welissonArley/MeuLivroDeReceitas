@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.IdentityModel.Tokens;
 using System.Threading.Tasks;
 
-namespace MeuLivroDeReceitas.Api.Filtros;
+namespace MeuLivroDeReceitas.Api.Filtros.UsuarioLogado;
 
 public class UsuarioAutenticadoAttribute : AuthorizeAttribute, IAsyncAuthorizationFilter
 {
