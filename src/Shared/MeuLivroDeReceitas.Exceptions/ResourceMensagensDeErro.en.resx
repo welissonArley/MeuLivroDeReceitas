@@ -120,6 +120,9 @@
   <data name="CATEGORIA_RECEITA_INVALIDA" xml:space="preserve">
     <value>The recipe category is invalid.</value>
   </data>
+  <data name="CODIGO_NAO_ENCONTRADO" xml:space="preserve">
+    <value>Code not found.</value>
+  </data>
   <data name="EMAIL_JA_REGISTRADO" xml:space="preserve">
     <value>The e-mail address you entered is already registered in the database.</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="ERRO_DESCONHECIDO" xml:space="preserve">
     <value>Unknow error.</value>
+  </data>
+  <data name="ESTA_CONEXAO_JA_EXISTE" xml:space="preserve">
+    <value>This connection already exists.</value>
   </data>
   <data name="LOGIN_INVALIDO" xml:space="preserve">
     <value>Your email and/or password are incorrect.</value>
@@ -180,7 +186,13 @@
   <data name="TOKEN_EXPIRADO" xml:space="preserve">
     <value>Login again on the App.</value>
   </data>
+  <data name="USUARIO_NAO_ENCONTRADO" xml:space="preserve">
+    <value>User not found.</value>
+  </data>
   <data name="USUARIO_SEM_PERMISSAO" xml:space="preserve">
     <value>You are not allowed to access this feature.</value>
+  </data>
+  <data name="VOCE_NAO_PODE_EXECUTAR_ESTA_OPERACAO" xml:space="preserve">
+    <value>You cannot perform this operation.</value>
   </data>
 </root>
