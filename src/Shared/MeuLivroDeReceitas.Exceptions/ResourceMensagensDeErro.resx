@@ -120,6 +120,9 @@
   <data name="CATEGORIA_RECEITA_INVALIDA" xml:space="preserve">
     <value>A categoria da receita é inválida.</value>
   </data>
+  <data name="CODIGO_NAO_ENCONTRADO" xml:space="preserve">
+    <value>Código não encontrado.</value>
+  </data>
   <data name="EMAIL_JA_REGISTRADO" xml:space="preserve">
     <value>O e-mail informado já esta registrado na base de dados.</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="ERRO_DESCONHECIDO" xml:space="preserve">
     <value>Erro desconhecido.</value>
+  </data>
+  <data name="ESTA_CONEXAO_JA_EXISTE" xml:space="preserve">
+    <value>Esta conexão já existe.</value>
   </data>
   <data name="LOGIN_INVALIDO" xml:space="preserve">
     <value>O e-mail e/ou senha estão incorretos.</value>
@@ -180,7 +186,13 @@
   <data name="TOKEN_EXPIRADO" xml:space="preserve">
     <value>Faça login novamente no App.</value>
   </data>
+  <data name="USUARIO_NAO_ENCONTRADO" xml:space="preserve">
+    <value>Usuário não encontrado</value>
+  </data>
   <data name="USUARIO_SEM_PERMISSAO" xml:space="preserve">
     <value>Você não tem permissão para acessar este recurso.</value>
+  </data>
+  <data name="VOCE_NAO_PODE_EXECUTAR_ESTA_OPERACAO" xml:space="preserve">
+    <value>Você não pode executar esta operação.</value>
   </data>
 </root>
