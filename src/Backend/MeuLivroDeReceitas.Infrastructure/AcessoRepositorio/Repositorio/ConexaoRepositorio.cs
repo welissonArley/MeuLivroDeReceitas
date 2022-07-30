@@ -30,4 +30,14 @@ public class ConexaoRepositorio : IConexaoReadOnlyRepositorio, IConexaoWriteOnly
     {
         await _contexto.Conexoes.AddAsync(conexao);
     }
+
+    public async Task RemoverConexao(long usuarioId, long usuarioIdParaRemover)
+    {
+        var conexoes = await _contexto.Conexoes
+            .Where(c => (c.UsuarioId == usuarioId && c.ConectadoComUsuarioId == usuarioIdParaRemover)
+                ||
+                    (c.UsuarioId == usuarioIdParaRemover && c.ConectadoComUsuarioId == usuarioId)).ToListAsync();
+
+        _contexto.Conexoes.RemoveRange(conexoes);
+    }
 }
