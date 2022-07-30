@@ -50,4 +50,9 @@ public class ReceitaRepositorio : IReceitaWriteOnlyRepositorio, IReceitaReadOnly
         
         _contexto.Receitas.Remove(receita);
     }
+
+    public async Task<int> QuantidadeReceitas(long usuarioId)
+    {
+        return await _contexto.Receitas.CountAsync(r => r.UsuarioId == usuarioId);
+    }
 }
