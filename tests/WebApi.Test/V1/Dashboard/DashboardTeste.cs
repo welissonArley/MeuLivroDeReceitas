@@ -21,7 +21,7 @@ public class DashboardTeste : ControllerBase
         _senhaUsuarioComReceita = factory.RecuperarSenha();
 
         _usuarioSemReceita = factory.RecuperarUsuarioSemReceita();
-        _senhaUsuarioSemReceita = factory.RecuperarSenhaSemReceita();
+        _senhaUsuarioSemReceita = factory.RecuperarSenhaUsuarioSemReceita();
     }
 
     [Fact]

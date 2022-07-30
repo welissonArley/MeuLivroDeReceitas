@@ -37,6 +37,13 @@ public class ReceitaReadOnlyRepositorioBuilder
         return this;
     }
 
+    public ReceitaReadOnlyRepositorioBuilder QuantidadeReceitas(int quantidadeReceitas)
+    {
+        _repositorio.Setup(r => r.QuantidadeReceitas(It.IsAny<long>())).ReturnsAsync(quantidadeReceitas);
+
+        return this;
+    }
+
     public IReceitaReadOnlyRepositorio Construir()
     {
         return _repositorio.Object;
