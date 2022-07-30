@@ -5,6 +5,7 @@ using MeuLivroDeReceitas.Comunicacao.Respostas;
 using MeuLivroDeReceitas.Exceptions;
 using MeuLivroDeReceitas.Exceptions.ExceptionsBase;
 using Moq;
+using Utilitario.ParaOsTestes.Image;
 using Utilitario.ParaOsTestes.Respostas;
 using WebApi.Test.V1.Conexao.Builder;
 using Xunit;
@@ -21,7 +22,7 @@ public class QRCodeLidoTeste
         (var mockHubContext, var mockClientProxy, var mockClients, var mockHubContextCaller) = MockWebSocketConnectionsBuilder.Construir();
 
         var useCaseQRCodeLido = QRCodeLidoUseCaseBuilder(usuarioParaSeConectar, codigoGeradoParaConexao);
-        var useCaseGerarQRCode = GerarQRCodeUseCaseBuilder(codigoGeradoParaConexao);
+        var useCaseGerarQRCode = GerarQRCodeUseCaseBuilder();
 
         var hub = new AdicionarConexao(mockHubContext.Object, useCaseGerarQRCode, useCaseQRCodeLido, null, null)
         {
@@ -50,7 +51,7 @@ public class QRCodeLidoTeste
         (var mockHubContext, var mockClientProxy, var mockClients, var mockHubContextCaller) = MockWebSocketConnectionsBuilder.Construir();
 
         var useCaseQRCodeLido = QRCodeLidoUseCase_ErroDesconhecidoBuilder(usuarioParaSeConectar, codigoGeradoParaConexao);
-        var useCaseGerarQRCode = GerarQRCodeUseCaseBuilder(codigoGeradoParaConexao);
+        var useCaseGerarQRCode = GerarQRCodeUseCaseBuilder();
 
         var hub = new AdicionarConexao(mockHubContext.Object, useCaseGerarQRCode, useCaseQRCodeLido, null, null)
         {
@@ -121,11 +122,11 @@ public class QRCodeLidoTeste
         return useCaseMock.Object;
     }    
 
-    private static IGerarQRCodeUseCase GerarQRCodeUseCaseBuilder(string qrCode)
+    private static IGerarQRCodeUseCase GerarQRCodeUseCaseBuilder()
     {
         var useCaseMock = new Mock<IGerarQRCodeUseCase>();
 
-        useCaseMock.Setup(c => c.Executar()).ReturnsAsync((qrCode, "IdUsuario"));
+        useCaseMock.Setup(c => c.Executar()).ReturnsAsync((ImageBase64Builder.Construir(), "IdUsuario"));
 
         return useCaseMock.Object;
     }
