@@ -40,7 +40,7 @@ public class ReceitasController : MeuLivroDeReceitasController
     
     [HttpPut]
     [Route("{id:hashids}")]
-    [ProducesResponseType(typeof(RespostaReceitaJson), StatusCodes.Status204NoContent)]
+    [ProducesResponseType(StatusCodes.Status204NoContent)]
     public async Task<IActionResult> Atualizar(
         [FromServices] IAtualizarReceitaUseCase useCase,
         [FromBody] RequisicaoReceitaJson requisicao,
