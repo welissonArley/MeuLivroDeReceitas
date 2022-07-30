@@ -19,7 +19,7 @@ public class GerarQRCodeUseCaseTeste
         var resultado = await useCase.Executar();
 
         resultado.Should().NotBeNull();
-        resultado.qrCode.Should().NotBeNullOrWhiteSpace();
+        resultado.qrCode.Should().NotBeEmpty();
 
         var hashids = HashidsBuilder.Instance().Build();
         resultado.idUsuario.Should().Be(hashids.EncodeLong(usuario.Id));
