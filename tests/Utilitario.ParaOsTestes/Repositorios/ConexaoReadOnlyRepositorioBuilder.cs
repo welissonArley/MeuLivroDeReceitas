@@ -1,4 +1,5 @@
-﻿using MeuLivroDeReceitas.Domain.Repositorios.Conexao;
+﻿using MeuLivroDeReceitas.Domain.Entidades;
+using MeuLivroDeReceitas.Domain.Repositorios.Conexao;
 using Moq;
 
 namespace Utilitario.ParaOsTestes.Repositorios;
@@ -28,6 +29,13 @@ public class ConexaoReadOnlyRepositorioBuilder
             _repositorio.Setup(x => x.ExisteConexao(usuarioAId.Value, usuarioBId.Value)).ReturnsAsync(true);
         }
         
+        return this;
+    }
+
+    public ConexaoReadOnlyRepositorioBuilder RecuperarDoUsuario(Usuario usuario, IList<Usuario> conexoes)
+    {
+        _repositorio.Setup(x => x.RecuperarDoUsuario(usuario.Id)).ReturnsAsync(conexoes);
+
         return this;
     }
 

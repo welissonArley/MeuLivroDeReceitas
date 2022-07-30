@@ -14,6 +14,9 @@ public class MeuLivroReceitaWebApplicationFactory<TStartup> : WebApplicationFact
     private MeuLivroDeReceitas.Domain.Entidades.Usuario _usuarioSemReceita;
     private string _senhaUsarioSemReceita;
 
+    private MeuLivroDeReceitas.Domain.Entidades.Usuario _usuarioComConexao;
+    private string _senhaUsarioComConexao;
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Test")
@@ -43,6 +46,7 @@ public class MeuLivroReceitaWebApplicationFactory<TStartup> : WebApplicationFact
 
                 (_usuarioComReceita, _senhaUsarioComReceita) = ContextSeedInMemory.Seed(database);
                 (_usuarioSemReceita, _senhaUsarioSemReceita) = ContextSeedInMemory.SeedUsuarioSemReceita(database);
+                (_usuarioComConexao, _senhaUsarioComConexao) = ContextSeedInMemory.SeedUsuarioComConexao(database);
             });
     }
 
@@ -61,8 +65,18 @@ public class MeuLivroReceitaWebApplicationFactory<TStartup> : WebApplicationFact
         return _usuarioSemReceita;
     }
 
-    public string RecuperarSenhaSemReceita()
+    public string RecuperarSenhaUsuarioSemReceita()
     {
         return _senhaUsarioSemReceita;
+    }
+
+    public MeuLivroDeReceitas.Domain.Entidades.Usuario RecuperarUsuarioComConexao()
+    {
+        return _usuarioComConexao;
+    }
+
+    public string RecuperarSenhaUsuarioComConexao()
+    {
+        return _senhaUsarioComConexao;
     }
 }

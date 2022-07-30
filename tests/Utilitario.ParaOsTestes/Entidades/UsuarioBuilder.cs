@@ -19,7 +19,15 @@ public class UsuarioBuilder
         (var usuario, var senha) = CriarUsuario();
         usuario.Id = 2;
 
-        return (usuario, senha);        
+        return (usuario, senha);
+    }
+
+    public static (Usuario usuario, string senha) ConstruirUsuarioComConexao()
+    {
+        (var usuario, var senha) = CriarUsuario();
+        usuario.Id = 3;
+
+        return (usuario, senha);
     }
 
     private static (Usuario usuario, string senha) CriarUsuario()
