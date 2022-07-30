@@ -4,6 +4,7 @@ using MeuLivroDeReceitas.Application.Servicos.UsuarioLogado;
 using MeuLivroDeReceitas.Application.UseCases.Conexao.AceitarConexao;
 using MeuLivroDeReceitas.Application.UseCases.Conexao.GerarQRCode;
 using MeuLivroDeReceitas.Application.UseCases.Conexao.QRCodeLido;
+using MeuLivroDeReceitas.Application.UseCases.Conexao.Recuperar;
 using MeuLivroDeReceitas.Application.UseCases.Conexao.RecusarConexao;
 using MeuLivroDeReceitas.Application.UseCases.Dashboard;
 using MeuLivroDeReceitas.Application.UseCases.Login.FazerLogin;
@@ -75,6 +76,7 @@ public static class Bootstrapper
             .AddScoped<IGerarQRCodeUseCase, GerarQRCodeUseCase>()
             .AddScoped<IQRCodeLidoUseCase, QRCodeLidoUseCase>()
             .AddScoped<IRecusarConexaoUseCase, RecusarConexaoUseCase>()
-            .AddScoped<IAceitarConexaoUseCase, AceitarConexaoUseCase>();
+            .AddScoped<IAceitarConexaoUseCase, AceitarConexaoUseCase>()
+            .AddScoped<IRecuperarTodasConexoesUseCase, RecuperarTodasConexoesUseCase>();
     }
 }
