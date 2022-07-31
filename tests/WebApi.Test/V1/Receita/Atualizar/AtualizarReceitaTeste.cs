@@ -41,8 +41,10 @@ public class AtualizarReceitaTeste : ControllerBase
         responseData.RootElement.GetProperty("tempoPreparo").GetInt32().Should().Be(requisicao.TempoPreparo);
     }
 
-    [Fact]
-    public async Task Validar_Erro_Ingredientes_Vazio()
+    [Theory]
+    [InlineData("pt")]
+    [InlineData("en")]
+    public async Task Validar_Erro_Ingredientes_Vazio(string cultura)
     {
         var token = await Login(_usuario.Email, _senha);
         var requisicao = RequisicaoReceitaBuilder.Construir();
@@ -50,7 +52,7 @@ public class AtualizarReceitaTeste : ControllerBase
 
         var receitaId = await GetReceitaId(token);
 
-        var resposta = await PutRequest($"{METODO}/{receitaId}", requisicao, token);
+        var resposta = await PutRequest($"{METODO}/{receitaId}", requisicao, token, cultura: cultura);
 
         resposta.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
@@ -59,18 +61,22 @@ public class AtualizarReceitaTeste : ControllerBase
         var responseData = await JsonDocument.ParseAsync(responstaBody);
 
         var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
-        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(ResourceMensagensDeErro.RECEITA_MINIMO_UM_INGREDIENTE));
+
+        var mensagemEsperada = ResourceMensagensDeErro.ResourceManager.GetString("RECEITA_MINIMO_UM_INGREDIENTE", new System.Globalization.CultureInfo(cultura));
+        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(mensagemEsperada));
     }
 
-    [Fact]
-    public async Task Validar_Erro_Receita_Inexistente()
+    [Theory]
+    [InlineData("pt")]
+    [InlineData("en")]
+    public async Task Validar_Erro_Receita_Inexistente(string cultura)
     {
         var token = await Login(_usuario.Email, _senha);
         var requisicao = RequisicaoReceitaBuilder.Construir();
 
         var receitaId = HashidsBuilder.Instance().Build().EncodeLong(0);
 
-        var resposta = await PutRequest($"{METODO}/{receitaId}", requisicao, token);
+        var resposta = await PutRequest($"{METODO}/{receitaId}", requisicao, token, cultura: cultura);
 
         resposta.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
@@ -79,7 +85,9 @@ public class AtualizarReceitaTeste : ControllerBase
         var responseData = await JsonDocument.ParseAsync(responstaBody);
 
         var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
-        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(ResourceMensagensDeErro.RECEITA_NAO_ENCONTRADA));
+
+        var mensagemEsperada = ResourceMensagensDeErro.ResourceManager.GetString("RECEITA_NAO_ENCONTRADA", new System.Globalization.CultureInfo(cultura));
+        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(mensagemEsperada));
     }
 
     private async Task<JsonDocument> GetReceitaPorId(string token, string receitaId)

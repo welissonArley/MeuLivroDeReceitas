@@ -41,14 +41,16 @@ public class RegistrarReceitaTest : ControllerBase
         responseData.RootElement.GetProperty("tempoPreparo").GetInt32().Should().Be(requisicao.TempoPreparo);
     }
 
-    [Fact]
-    public async Task Validar_Erro_Sem_Ingredientes()
+    [Theory]
+    [InlineData("pt")]
+    [InlineData("en")]
+    public async Task Validar_Erro_Sem_Ingredientes(string cultura)
     {
         var token = await Login(_usuario.Email, _senha);
         var requisicao = RequisicaoReceitaBuilder.Construir();
         requisicao.Ingredientes.Clear();
 
-        var resposta = await PostRequest(METODO, requisicao, token);
+        var resposta = await PostRequest(METODO, requisicao, token, cultura: cultura);
 
         resposta.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
@@ -57,6 +59,8 @@ public class RegistrarReceitaTest : ControllerBase
         var responseData = await JsonDocument.ParseAsync(responstaBody);
 
         var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
-        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(ResourceMensagensDeErro.RECEITA_MINIMO_UM_INGREDIENTE));
+
+        var mensagemEsperada = ResourceMensagensDeErro.ResourceManager.GetString("RECEITA_MINIMO_UM_INGREDIENTE", new System.Globalization.CultureInfo(cultura));        
+        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(mensagemEsperada));
     }
 }

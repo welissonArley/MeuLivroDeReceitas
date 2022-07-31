@@ -48,14 +48,16 @@ public class RemoverConexaoTeste : ControllerBase
         respostaGetConexoesAposDelete.StatusCode.Should().Be(HttpStatusCode.NoContent);
     }
 
-    [Fact]
-    public async Task Validar_Usuario_Id_Invalido()
+    [Theory]
+    [InlineData("pt")]
+    [InlineData("en")]
+    public async Task Validar_Usuario_Id_Invalido(string cultura)
     {
         var token = await Login(_usuarioComConexao.Email, _senhaUsuarioComConexao);
 
         var idParaRemover = HashidsBuilder.Instance().Build().EncodeLong(0);
 
-        var resposta = await DeleteRequest($"{METODO}/{idParaRemover}", token);
+        var resposta = await DeleteRequest($"{METODO}/{idParaRemover}", token, cultura: cultura);
 
         resposta.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
@@ -64,17 +66,21 @@ public class RemoverConexaoTeste : ControllerBase
         var responseData = await JsonDocument.ParseAsync(responstaBody);
 
         var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
-        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(ResourceMensagensDeErro.USUARIO_NAO_ENCONTRADO));
+
+        var mensagemEsperada = ResourceMensagensDeErro.ResourceManager.GetString("USUARIO_NAO_ENCONTRADO", new System.Globalization.CultureInfo(cultura));
+        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(mensagemEsperada));
     }
 
-    [Fact]
-    public async Task Validar_Usuario_Sem_Conexao()
+    [Theory]
+    [InlineData("pt")]
+    [InlineData("en")]
+    public async Task Validar_Usuario_Sem_Conexao(string cultura)
     {
         var token = await Login(_usuarioSemConexao.Email, _senhaUsuarioSemConexao);
 
         var idParaRemover = HashidsBuilder.Instance().Build().EncodeLong(0);
 
-        var resposta = await DeleteRequest($"{METODO}/{idParaRemover}", token);
+        var resposta = await DeleteRequest($"{METODO}/{idParaRemover}", token, cultura: cultura);
 
         resposta.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
@@ -83,6 +89,8 @@ public class RemoverConexaoTeste : ControllerBase
         var responseData = await JsonDocument.ParseAsync(responstaBody);
 
         var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
-        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(ResourceMensagensDeErro.USUARIO_NAO_ENCONTRADO));
+
+        var mensagemEsperada = ResourceMensagensDeErro.ResourceManager.GetString("USUARIO_NAO_ENCONTRADO", new System.Globalization.CultureInfo(cultura));
+        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(mensagemEsperada));
     }    
 }
