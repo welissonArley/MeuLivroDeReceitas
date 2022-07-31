@@ -25,7 +25,7 @@ public class LoginUseCase : ILoginUseCase
 
         var usuario = await _usuarioReadOnlyRepositorio.RecuperarPorEmailSenha(request.Email, senhaCriptografada);
 
-        if (usuario == null)
+        if (usuario is null)
         {
             throw new LoginInvalidoException();
         }

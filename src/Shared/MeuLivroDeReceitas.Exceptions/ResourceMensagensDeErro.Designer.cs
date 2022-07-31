@@ -61,6 +61,24 @@ namespace MeuLivroDeReceitas.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A categoria da receita é inválida..
+        /// </summary>
+        public static string CATEGORIA_RECEITA_INVALIDA {
+            get {
+                return ResourceManager.GetString("CATEGORIA_RECEITA_INVALIDA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Código não encontrado..
+        /// </summary>
+        public static string CODIGO_NAO_ENCONTRADO {
+            get {
+                return ResourceManager.GetString("CODIGO_NAO_ENCONTRADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O e-mail informado já esta registrado na base de dados..
         /// </summary>
         public static string EMAIL_JA_REGISTRADO {
@@ -97,6 +115,15 @@ namespace MeuLivroDeReceitas.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Esta conexão já existe..
+        /// </summary>
+        public static string ESTA_CONEXAO_JA_EXISTE {
+            get {
+                return ResourceManager.GetString("ESTA_CONEXAO_JA_EXISTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O e-mail e/ou senha estão incorretos..
         /// </summary>
         public static string LOGIN_INVALIDO {
@@ -106,11 +133,65 @@ namespace MeuLivroDeReceitas.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O modo de preparo da receita deve ser informado..
+        /// </summary>
+        public static string MODOPREPARO_RECEITA_EMBRANCO {
+            get {
+                return ResourceManager.GetString("MODOPREPARO_RECEITA_EMBRANCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to O nome do usuário deve ser informado..
         /// </summary>
         public static string NOME_USUARIO_EMBRANCO {
             get {
                 return ResourceManager.GetString("NOME_USUARIO_EMBRANCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O produto do ingrediente deve ser informado..
+        /// </summary>
+        public static string RECEITA_INGREDIENTE_PRODUTO_EMBRANCO {
+            get {
+                return ResourceManager.GetString("RECEITA_INGREDIENTE_PRODUTO_EMBRANCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A quantidade do ingrediente deve ser informada..
+        /// </summary>
+        public static string RECEITA_INGREDIENTE_QUANTIDADE_EMBRANCO {
+            get {
+                return ResourceManager.GetString("RECEITA_INGREDIENTE_QUANTIDADE_EMBRANCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exitem ingredientes repetidos na sua lista..
+        /// </summary>
+        public static string RECEITA_INGREDIENTES_REPETIDOS {
+            get {
+                return ResourceManager.GetString("RECEITA_INGREDIENTES_REPETIDOS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A receita deve ter no mínimo um ingrediente..
+        /// </summary>
+        public static string RECEITA_MINIMO_UM_INGREDIENTE {
+            get {
+                return ResourceManager.GetString("RECEITA_MINIMO_UM_INGREDIENTE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receita não encontrada..
+        /// </summary>
+        public static string RECEITA_NAO_ENCONTRADA {
+            get {
+                return ResourceManager.GetString("RECEITA_NAO_ENCONTRADA", resourceCulture);
             }
         }
         
@@ -160,6 +241,24 @@ namespace MeuLivroDeReceitas.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to O tempo de preparo é invalido..
+        /// </summary>
+        public static string TEMPO_PREPARO_INVALIDO {
+            get {
+                return ResourceManager.GetString("TEMPO_PREPARO_INVALIDO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to O título da receita deve ser informado..
+        /// </summary>
+        public static string TITULO_RECEITA_EMBRANCO {
+            get {
+                return ResourceManager.GetString("TITULO_RECEITA_EMBRANCO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Faça login novamente no App..
         /// </summary>
         public static string TOKEN_EXPIRADO {
@@ -169,11 +268,29 @@ namespace MeuLivroDeReceitas.Exceptions {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Usuário não encontrado.
+        /// </summary>
+        public static string USUARIO_NAO_ENCONTRADO {
+            get {
+                return ResourceManager.GetString("USUARIO_NAO_ENCONTRADO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Você não tem permissão para acessar este recurso..
         /// </summary>
         public static string USUARIO_SEM_PERMISSAO {
             get {
                 return ResourceManager.GetString("USUARIO_SEM_PERMISSAO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Você não pode executar esta operação..
+        /// </summary>
+        public static string VOCE_NAO_PODE_EXECUTAR_ESTA_OPERACAO {
+            get {
+                return ResourceManager.GetString("VOCE_NAO_PODE_EXECUTAR_ESTA_OPERACAO", resourceCulture);
             }
         }
     }

@@ -33,15 +33,17 @@ public class AlterarSenhaTeste : ControllerBase
         resposta.StatusCode.Should().Be(HttpStatusCode.NoContent);
     }
 
-    [Fact]
-    public async Task Validar_Erro_SenhaEmBranco()
+    [Theory]
+    [InlineData("pt")]
+    [InlineData("en")]
+    public async Task Validar_Erro_SenhaEmBranco(string cultura)
     {
         var token = await Login(_usuario.Email, _senha);
         var requisicao = RequisicaoAlterarSenhaUsuarioBuilder.Construir();
         requisicao.SenhaAtual = _senha;
         requisicao.NovaSenha = string.Empty;
 
-        var resposta = await PutRequest(METODO, requisicao, token);
+        var resposta = await PutRequest(METODO, requisicao, token, cultura: cultura);
 
         resposta.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
@@ -50,6 +52,9 @@ public class AlterarSenhaTeste : ControllerBase
         var responseData = await JsonDocument.ParseAsync(responstaBody);
 
         var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
-        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(ResourceMensagensDeErro.SENHA_USUARIO_EMBRANCO));
+
+        var mensagemEsperada = ResourceMensagensDeErro.ResourceManager.GetString("SENHA_USUARIO_EMBRANCO", new System.Globalization.CultureInfo(cultura));
+
+        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(mensagemEsperada));
     }
 }

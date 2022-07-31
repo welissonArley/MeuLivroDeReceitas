@@ -8,16 +8,22 @@ namespace WebApi.Test;
 
 public class MeuLivroReceitaWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup> where TStartup : class
 {
-    private MeuLivroDeReceitas.Domain.Entidades.Usuario _usuario;
-    private string _senha;
-    
+    private MeuLivroDeReceitas.Domain.Entidades.Usuario _usuarioComReceita;
+    private string _senhaUsarioComReceita;
+
+    private MeuLivroDeReceitas.Domain.Entidades.Usuario _usuarioSemReceita;
+    private string _senhaUsarioSemReceita;
+
+    private MeuLivroDeReceitas.Domain.Entidades.Usuario _usuarioComConexao;
+    private string _senhaUsarioComConexao;
+
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Test")
             .ConfigureServices(services =>
             {
                 var descritor = services.SingleOrDefault(d => d.ServiceType == typeof(MeuLivroDeReceitasContext));
-                if (descritor != null)
+                if (descritor is not null)
                     services.Remove(descritor);
 
                 var provider = services.AddEntityFrameworkInMemoryDatabase().BuildServiceProvider();
@@ -38,17 +44,39 @@ public class MeuLivroReceitaWebApplicationFactory<TStartup> : WebApplicationFact
 
                 database.Database.EnsureDeleted();
 
-                (_usuario, _senha) = ContextSeedInMemory.Seed(database);
+                (_usuarioComReceita, _senhaUsarioComReceita) = ContextSeedInMemory.Seed(database);
+                (_usuarioSemReceita, _senhaUsarioSemReceita) = ContextSeedInMemory.SeedUsuarioSemReceita(database);
+                (_usuarioComConexao, _senhaUsarioComConexao) = ContextSeedInMemory.SeedUsuarioComConexao(database);
             });
     }
 
     public MeuLivroDeReceitas.Domain.Entidades.Usuario RecuperarUsuario()
     {
-        return _usuario;
+        return _usuarioComReceita;
     }
 
     public string RecuperarSenha()
     {
-        return _senha;
+        return _senhaUsarioComReceita;
+    }
+
+    public MeuLivroDeReceitas.Domain.Entidades.Usuario RecuperarUsuarioSemReceita()
+    {
+        return _usuarioSemReceita;
+    }
+
+    public string RecuperarSenhaUsuarioSemReceita()
+    {
+        return _senhaUsarioSemReceita;
+    }
+
+    public MeuLivroDeReceitas.Domain.Entidades.Usuario RecuperarUsuarioComConexao()
+    {
+        return _usuarioComConexao;
+    }
+
+    public string RecuperarSenhaUsuarioComConexao()
+    {
+        return _senhaUsarioComConexao;
     }
 }
