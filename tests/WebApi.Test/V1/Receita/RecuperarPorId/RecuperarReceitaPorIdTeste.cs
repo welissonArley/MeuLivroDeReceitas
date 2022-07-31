@@ -42,14 +42,16 @@ public class RecuperarReceitaPorIdTeste : ControllerBase
         responseData.RootElement.GetProperty("tempoPreparo").GetUInt32().Should().BeGreaterThan(0).And.BeLessThanOrEqualTo(1000);
     }
 
-    [Fact]
-    public async Task Validar_Erro_Receita_Inexistente()
+    [Theory]
+    [InlineData("pt")]
+    [InlineData("en")]
+    public async Task Validar_Erro_Receita_Inexistente(string cultura)
     {
         var token = await Login(_usuario.Email, _senha);
 
         var receitaId = HashidsBuilder.Instance().Build().EncodeLong(0);
 
-        var resposta = await DeleteRequest($"{METODO}/{receitaId}", token);
+        var resposta = await DeleteRequest($"{METODO}/{receitaId}", token, cultura: cultura);
 
         resposta.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
@@ -58,6 +60,8 @@ public class RecuperarReceitaPorIdTeste : ControllerBase
         var responseData = await JsonDocument.ParseAsync(responstaBody);
 
         var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
-        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(ResourceMensagensDeErro.RECEITA_NAO_ENCONTRADA));
+
+        var mensagemEsperada = ResourceMensagensDeErro.ResourceManager.GetString("RECEITA_NAO_ENCONTRADA", new System.Globalization.CultureInfo(cultura));
+        erros.Should().ContainSingle().And.Contain(x => x.GetString().Equals(mensagemEsperada));
     }
 }

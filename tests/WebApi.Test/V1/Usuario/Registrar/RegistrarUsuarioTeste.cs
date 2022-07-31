@@ -32,13 +32,15 @@ public class RegistrarUsuarioTeste : ControllerBase
         responseData.RootElement.GetProperty("token").GetString().Should().NotBeNullOrWhiteSpace();
     }
 
-    [Fact]
-    public async Task Validar_Erro_Nome_Vazio()
+    [Theory]
+    [InlineData("pt")]
+    [InlineData("en")]
+    public async Task Validar_Erro_Nome_Vazio(string cultura)
     {
         var requisicao = RequisicaoRegistrarUsuarioBuilder.Construir();
         requisicao.Nome = "";
 
-        var resposta = await PostRequest(METODO, requisicao);
+        var resposta = await PostRequest(METODO, requisicao, cultura: cultura);
 
         resposta.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
@@ -47,6 +49,8 @@ public class RegistrarUsuarioTeste : ControllerBase
         var responseData = await JsonDocument.ParseAsync(responstaBody);
 
         var erros = responseData.RootElement.GetProperty("mensagens").EnumerateArray();
-        erros.Should().ContainSingle().And.Contain(c => c.GetString().Equals(ResourceMensagensDeErro.NOME_USUARIO_EMBRANCO));
+
+        var mensagemEsperada = ResourceMensagensDeErro.ResourceManager.GetString("NOME_USUARIO_EMBRANCO", new System.Globalization.CultureInfo(cultura));
+        erros.Should().ContainSingle().And.Contain(c => c.GetString().Equals(mensagemEsperada));
     }
 }
