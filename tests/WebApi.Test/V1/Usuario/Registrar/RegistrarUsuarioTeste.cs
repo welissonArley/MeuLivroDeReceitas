@@ -3,18 +3,17 @@ using MeuLivroDeReceitas.Exceptions;
 using System.Net;
 using System.Text.Json;
 using Utilitario.ParaOsTestes.Requisicoes;
-using WebApi.Test.V1;
 using Xunit;
 
-namespace WebApi.Test.Usuario.Registrar;
+namespace WebApi.Test.V1.Usuario.Registrar;
 
 public class RegistrarUsuarioTeste : ControllerBase
 {
     private const string METODO = "usuario";
-    
+
     public RegistrarUsuarioTeste(MeuLivroReceitaWebApplicationFactory<Program> factory) : base(factory)
     {
-        
+
     }
 
     [Fact]

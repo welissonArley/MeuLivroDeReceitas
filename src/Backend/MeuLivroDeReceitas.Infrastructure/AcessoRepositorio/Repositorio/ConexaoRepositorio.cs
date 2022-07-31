@@ -12,9 +12,9 @@ public class ConexaoRepositorio : IConexaoReadOnlyRepositorio, IConexaoWriteOnly
         _contexto = contexto;
     }
 
-    public async Task<bool> ExisteConexao(long usuarioA, long usuarioB)
+    public async Task<bool> ExisteConexao(long idUsuarioA, long idUsuarioB)
     {
-        return await _contexto.Conexoes.AnyAsync(c => c.UsuarioId == usuarioA && c.ConectadoComUsuarioId == usuarioB);
+        return await _contexto.Conexoes.AnyAsync(c => c.UsuarioId == idUsuarioA && c.ConectadoComUsuarioId == idUsuarioB);
     }
 
     public async Task<IList<Usuario>> RecuperarDoUsuario(long usuarioId)

@@ -52,7 +52,7 @@ public class ControllerBase : IClassFixture<MeuLivroReceitaWebApplicationFactory
 
     protected async Task<string> Login(string email, string senha)
     {
-        var requisicao = new MeuLivroDeReceitas.Comunicacao.Requisicoes.RequisicaoLoginJson
+        var requisicao = new RequisicaoLoginJson
         {
             Email = email,
             Senha = senha

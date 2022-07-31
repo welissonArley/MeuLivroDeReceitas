@@ -108,7 +108,7 @@ public class QRCodeLidoTeste
     {
         var useCaseMock = new Mock<IQRCodeLidoUseCase>();
 
-        useCaseMock.Setup(c => c.Executar(qrCode)).ThrowsAsync(new ArgumentOutOfRangeException());
+        useCaseMock.Setup(c => c.Executar(qrCode)).ThrowsAsync(new ArgumentOutOfRangeException(string.Empty));
 
         return useCaseMock.Object;
     }
@@ -117,7 +117,7 @@ public class QRCodeLidoTeste
     {
         var useCaseMock = new Mock<IQRCodeLidoUseCase>();
 
-        useCaseMock.Setup(c => c.Executar(qrCode)).ThrowsAsync(new MeuLivroDeReceitasException(ResourceMensagensDeErro.USUARIO_NAO_ENCONTRADO));
+        useCaseMock.Setup(c => c.Executar(qrCode)).ReturnsAsync((respostaJson, "IdInvalido"));
 
         return useCaseMock.Object;
     }    
