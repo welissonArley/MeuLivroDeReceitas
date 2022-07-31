@@ -63,7 +63,7 @@ public class ConexaoAceitaTeste
     {
         var useCaseMock = new Mock<IAceitarConexaoUseCase>();
 
-        useCaseMock.Setup(c => c.Executar(idUsuarioParaSeConectar)).ThrowsAsync(new ArgumentOutOfRangeException());
+        useCaseMock.Setup(c => c.Executar(idUsuarioParaSeConectar)).ThrowsAsync(new ArgumentOutOfRangeException(string.Empty));
 
         return useCaseMock.Object;
     }

@@ -52,7 +52,7 @@ builder.Services.AddSwaggerGen(option =>
                     Id = "Bearer"
                 }
             },
-            new string[] {}
+            System.Array.Empty<string>()
         }
     });
 });
