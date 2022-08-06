@@ -1,0 +1,24 @@
+name: Publish Docker image to Docker Hub
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  push_to_dockerHub:
+    name: Push Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - uses: actions/github-script@v6
+        with:
+           script: |
+              sed -i "s,#CONEXAO_BANCO_DADOS_PRODUCAO#,${{ secrets.CONEXAO_BANCO_DADOS_PRODUCAO }},g" src/Backend/MeuLivroDeReceitas.Api/appsettings.Production.json
+              sed -i "s,#JWT_CHAVE_TOKEN#,${{ secrets.JWT_CHAVE_TOKEN }},g" src/Backend/MeuLivroDeReceitas.Api/appsettings.Production.json
+              sed -i "s,#SENHA_CHAVE_ADICIONAL#,${{ secrets.SENHA_CHAVE_ADICIONAL }},g" src/Backend/MeuLivroDeReceitas.Api/appsettings.Production.json
+              sed -i "s,#HASH_IDS_SALT#,${{ secrets.HASH_IDS_SALT }},g" src/Backend/MeuLivroDeReceitas.Api/appsettings.Production.json
+              ls
+              cat src/Backend/MeuLivroDeReceitas.Api/appsettings.Production.json
