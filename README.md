@@ -56,7 +56,7 @@ Gravei tudo de forma bem simples, porém posso garantir que os alunos vão:
 
 Use o link abaixo e dê uma olhada no meu curso:
 
-https://www.udemy.com/course/net-core-curso-orientado-para-mercado-de-trabalho/
+https://www.udemy.com/course/net-core-curso-orientado-para-mercado-de-trabalho/?referralCode=C0850BF224055DE39722
 
 ### Build Status
 
